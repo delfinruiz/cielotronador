@@ -1,58 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Club CieloTronador
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sitio web y panel de administración del **Club de Básquetbol Cielo Tronador** (Talcahuano, Chile). Incluye una landing pública orientada a familias y jugadores, y un panel administrativo con gestión de noticias, galería, usuarios y permisos.
 
-## About Laravel
+## Características
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Sitio público** (`/`)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Landing con secciones: hero, quiénes somos, noticias, actividades, horarios, galería y contacto.
+- Noticias y galería paginadas, con modales de detalle y carga parcial de la galería vía cabecera `X-Partial: galeria`.
+- Formulario de contacto que envía un correo al club (`ContactMessage`).
+- Modo claro/oscuro, banner de cookies y barra de progreso de scroll.
+- Páginas de Política de Privacidad, Cookies y Datos.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Panel de administración** (`/admin`)
 
-## Learning Laravel
+- Filament v5 con tema propio (color primario `#FF4C00`), autenticación personalizada y recuperación de contraseña.
+- Recursos: **Noticias**, **Galería** (subida de imágenes), **Usuarios** y **Roles/Permisos** (Filament Shield + Spatie Permission).
+- Roles sembrados: `super_admin` (todos los permisos) y `panel_user`.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Stack
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Laravel 13 / PHP 8.3+ (entorno de desarrollo PHP 8.5)
+- Filament 5.7 + Livewire 4
+- Filament Shield + Spatie Laravel Permission
+- Tailwind CSS 4 (CSS-first, sin `tailwind.config.js`)
+- Vite 8 + `laravel-vite-plugin`
+- SQLite (desarrollo y tests)
+- PHPUnit 12
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Requisitos
 
-## Agentic Development
+- PHP 8.3 o superior con extensiones habituales de Laravel
+- Composer
+- Node.js + npm
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Instalación
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer run setup
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Este comando instala dependencias PHP, copia `.env`, genera la clave, ejecuta migraciones, instala dependencias JS y compila assets.
 
-## Contributing
+Después de configurar el correo en `.env`, puedes sembrar datos de ejemplo (noticias, galería desde `public/img/galeria` y roles de Shield):
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+php artisan db:seed
+```
 
-## Code of Conduct
+## Desarrollo
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer run dev
+```
 
-## Security Vulnerabilities
+Levanta en un solo proceso el servidor PHP, la cola, los logs (Pail) y Vite. El sitio queda en `http://localhost:8000` y el panel en `http://localhost:8000/admin`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Compilar assets manualmente:
 
-## License
+```bash
+npm run build
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> Nota: `.npmrc` define `ignore-scripts=true`, por lo que `npm install` no ejecuta scripts de build/postinstall.
+
+## Variables de entorno
+
+Las principales se documentan en `.env.example`. Destacan:
+
+| Variable | Descripción |
+| --- | --- |
+| `APP_NAME` | Nombre de la aplicación (`CieloTronador`). |
+| `DB_CONNECTION` | Por defecto `sqlite` (`database/database.sqlite`). |
+| `CONTACT_TO_EMAIL` | Destinatario del formulario de contacto. |
+| `MAIL_*` | Configuración SMTP para el envío de correos. |
+
+## Pruebas y formato
+
+```bash
+php artisan test --compact                                   # suite completa
+php artisan test --compact tests/Feature/NoticiaTest.php     # un archivo
+php artisan test --compact --filter=testName                 # un test
+vendor/bin/pint --dirty --format agent                       # formato de código PHP
+```
+
+## Estructura
+
+```
+app/
+├── Filament/          # Panel admin: Resources (Galerías, Noticias, Users) y Pages
+├── Http/              # Controladores (Landing, Contact, Policy), FormRequest y Mail
+├── Models/            # Noticia, Galeria, User
+└── Policies/          # Autorización por recurso
+database/
+├── migrations/        # noticias, galerias, permisos, tablas base
+└── seeders/           # DatabaseSeeder, NoticiaSeeder, GaleriaSeeder, ShieldSeeder
+resources/
+├── css/               # Tailwind (app.css y tema Filament)
+├── js/
+└── views/             # landing, políticas, mail, filament y parciales
+routes/web.php         # Landing, contacto y páginas legales
+```
+
+Las imágenes se almacenan en `public/img/galeria` (disco `galeria`) y `public/img/noticias` (disco `noticias`).
