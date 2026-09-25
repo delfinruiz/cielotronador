@@ -6,11 +6,14 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: ['resources/css/app.css', 'resources/js/app.js', 'resources/css/filament/admin/theme.css'],
             refresh: true,
             fonts: [
-                bunny('Instrument Sans', {
-                    weights: [400, 500, 600],
+                bunny('Poppins', {
+                    weights: [400, 500, 600, 700],
+                }),
+                bunny('Oswald', {
+                    weights: [500, 600, 700],
                 }),
             ],
         }),

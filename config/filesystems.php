@@ -60,6 +60,24 @@ return [
             'report' => false,
         ],
 
+        'noticias' => [
+            'driver' => 'local',
+            'root' => public_path('img/noticias'),
+            'url' => '/img/noticias',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'galeria' => [
+            'driver' => 'local',
+            'root' => public_path('img/galeria'),
+            'url' => '/img/galeria',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
     ],
 
     /*

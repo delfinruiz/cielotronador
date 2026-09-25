@@ -3,7 +3,188 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-heading: 'Oswald', ui-sans-serif, system-ui, sans-serif;
+
+    --color-brand-50: #fff4ed;
+    --color-brand-100: #ffe6d5;
+    --color-brand-200: #feccaa;
+    --color-brand-300: #ffa874;
+    --color-brand-400: #ff7a38;
+    --color-brand-500: #ff4c00;
+    --color-brand-600: #ed3f00;
+    --color-brand-700: #c43100;
+    --color-brand-800: #9c2902;
+    --color-brand-900: #7d2408;
+    --color-brand-950: #440f01;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--font-sans);
+    }
+}
+
+@layer components {
+    .js [data-reveal] {
+        opacity: 0;
+        transform: translateY(1.5rem);
+        transition:
+            opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+            transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+        will-change: opacity, transform;
+    }
+
+    .js [data-parallax] {
+        will-change: transform;
+    }
+
+    .js [data-reveal='left'] {
+        transform: translateX(-2.5rem);
+    }
+
+    .js [data-reveal='right'] {
+        transform: translateX(2.5rem);
+    }
+
+    .js [data-reveal='zoom'] {
+        transform: scale(0.9);
+    }
+
+    .js [data-reveal].reveal-in {
+        opacity: 1;
+        transform: none;
+    }
+
+    #scroll-progress {
+        transform-origin: left center;
+        transform: scaleX(0);
+        transition: transform 0.1s linear;
+    }
+
+    .header-bar {
+        transition: height 0.3s ease;
+    }
+
+    #site-header {
+        transition: box-shadow 0.3s ease;
+    }
+
+    #site-header.is-scrolled {
+        box-shadow: 0 4px 24px -8px rgb(0 0 0 / 0.12);
+    }
+
+    #site-header.is-scrolled .header-bar {
+        height: 3.75rem;
+    }
+
+    a.is-active-section {
+        color: var(--color-brand-600);
+    }
+
+    :is(.dark) a.is-active-section {
+        color: var(--color-brand-400);
+    }
+
+[data-top-button] {
+    opacity: 0;
+    pointer-events: none;
+}
+
+[data-top-button].is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+    .top-button-rotator {
+        transform: rotate(var(--rotacion, 0deg));
+    }
+
+    .top-button-bounce {
+        transform-origin: 50% 100%;
+    }
+
+    [data-top-button].is-visible .top-button-bounce {
+        animation: driblar 1.5s ease-in-out infinite;
+    }
+
+    [data-top-button].is-scrolling .top-button-bounce {
+        animation-play-state: paused;
+    }
+
+    @keyframes driblar {
+        0%,
+        100% {
+            transform: translateY(0) scale(1, 1);
+        }
+
+        18% {
+            transform: translateY(0) scale(1.08, 0.9);
+        }
+
+        50% {
+            transform: translateY(-11px) scale(0.98, 1.02);
+        }
+
+        82% {
+            transform: translateY(0) scale(1.08, 0.9);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        [data-top-button],
+        [data-top-button].is-visible {
+            transition: none;
+        }
+
+        .top-button-rotator {
+            transition: none;
+        }
+
+        .top-button-bounce {
+            animation: none !important;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .js [data-reveal],
+        .js [data-reveal].reveal-in {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+
+        .js [data-parallax] {
+            transform: none !important;
+        }
+
+        #scroll-progress,
+        .header-bar,
+        #site-header {
+            transition: none;
+        }
+    }
+
+    .cookie-banner {
+        transform: translateY(110%);
+        transition: transform 0.3s ease;
+    }
+
+    .cookie-banner.is-visible {
+        transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .cookie-banner {
+            transition: none;
+        }
+    }
 }

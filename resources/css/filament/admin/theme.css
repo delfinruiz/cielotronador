@@ -1,0 +1,22 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+@source '../../../../resources/views/partials/**/*';
+
+@theme {
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Oswald', ui-sans-serif, system-ui, sans-serif;
+
+    --color-brand-50: #fff4ed;
+    --color-brand-100: #ffe6d5;
+    --color-brand-200: #feccaa;
+    --color-brand-300: #ffa874;
+    --color-brand-400: #ff7a38;
+    --color-brand-500: #ff4c00;
+    --color-brand-600: #ed3f00;
+    --color-brand-700: #c43100;
+    --color-brand-800: #9c2902;
+    --color-brand-900: #7d2408;
+    --color-brand-950: #440f01;
+}

@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'contact' => [
+        'email' => env('CONTACT_TO_EMAIL', 'contacto@cielotronador.cl'),
+    ],
+
 ];
