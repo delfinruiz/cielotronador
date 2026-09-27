@@ -542,3 +542,70 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Widget flotante de WhatsApp: abre un panel estilo chat y, al enviar,
+// redirige a wa.me con el mensaje escrito por el visitante.
+document.addEventListener('DOMContentLoaded', () => {
+    const widget = document.getElementById('whatsapp-widget');
+
+    if (!widget) {
+        return;
+    }
+
+    const boton = document.getElementById('whatsapp-toggle');
+    const panel = document.getElementById('whatsapp-panel');
+    const botonCerrar = document.getElementById('whatsapp-close');
+    const formulario = document.getElementById('whatsapp-form');
+    const input = document.getElementById('whatsapp-input');
+    const numero = widget.dataset.waNumber;
+    const saludoPorDefecto = widget.dataset.waDefault || 'Hola, quiero hacer una consulta.';
+
+    const abrir = () => {
+        panel.hidden = false;
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => panel.classList.add('is-open'));
+        });
+        boton.setAttribute('aria-expanded', 'true');
+        input.focus();
+    };
+
+    const cerrar = () => {
+        panel.classList.remove('is-open');
+        boton.setAttribute('aria-expanded', 'false');
+        window.setTimeout(() => {
+            panel.hidden = true;
+        }, 200);
+    };
+
+    boton.addEventListener('click', () => {
+        if (panel.hidden) {
+            abrir();
+        } else {
+            cerrar();
+        }
+    });
+
+    botonCerrar.addEventListener('click', cerrar);
+
+    document.addEventListener('click', (event) => {
+        if (!panel.hidden && !widget.contains(event.target)) {
+            cerrar();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !panel.hidden) {
+            cerrar();
+        }
+    });
+
+    formulario.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const texto = input.value.trim() || saludoPorDefecto;
+        const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+
+        window.open(url, '_blank', 'noopener');
+        cerrar();
+    });
+});

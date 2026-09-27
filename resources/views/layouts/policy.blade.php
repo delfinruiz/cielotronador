@@ -54,6 +54,8 @@
 
 @include('partials.footer')
 
+@include('landing.partials.whatsapp')
+
 @include('landing.partials.cookie-banner')
 
 </body>

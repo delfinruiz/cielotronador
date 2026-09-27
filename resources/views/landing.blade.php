@@ -506,6 +506,8 @@
     </div>
 </div>
 
+@include('landing.partials.whatsapp')
+
 @include('landing.partials.cookie-banner')
 
 </body>

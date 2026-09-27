@@ -125,6 +125,16 @@ class LandingTest extends TestCase
         $this->assertStringContainsString('--rotacion', (new Filesystem)->get(base_path('resources/css/app.css')));
     }
 
+    public function test_la_landing_incluye_el_widget_de_whatsapp(): void
+    {
+        $html = $this->get(route('landing'))->assertOk()->getContent();
+
+        $this->assertStringContainsString('id="whatsapp-widget"', $html);
+        $this->assertStringContainsString('id="whatsapp-panel"', $html);
+        $this->assertStringContainsString('data-wa-number="56998970550"', $html);
+        $this->assertStringContainsString('Hola, soy la tía Jacqueline Reyes, directora del club CieloTronador.', $html);
+    }
+
     public function test_las_paginas_de_autenticacion_de_filament_estan_disponibles(): void
     {
         $this->get('/admin/login')->assertOk();

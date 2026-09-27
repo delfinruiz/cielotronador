@@ -187,4 +187,24 @@
             transition: none;
         }
     }
+
+    .whatsapp-panel {
+        opacity: 0;
+        transform: translateY(0.75rem) scale(0.96);
+        transform-origin: bottom right;
+        transition:
+            opacity 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .whatsapp-panel.is-open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .whatsapp-panel {
+            transition: none;
+        }
+    }
 }

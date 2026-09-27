@@ -43,4 +43,12 @@ class PoliticaTest extends TestCase
             ->assertSee('id="cookie-banner"', false)
             ->assertSee('Aceptar todas', false);
     }
+
+    public function test_las_politicas_incluyen_el_widget_de_whatsapp(): void
+    {
+        $this->get(route('politica.privacidad'))
+            ->assertOk()
+            ->assertSee('id="whatsapp-widget"', false)
+            ->assertSee('data-wa-number="56998970550"', false);
+    }
 }
