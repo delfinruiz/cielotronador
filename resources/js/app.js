@@ -609,3 +609,58 @@ document.addEventListener('DOMContentLoaded', () => {
         cerrar();
     });
 });
+
+// Formulario de contacto: habilita "Enviar" solo cuando los tres campos son
+// válidos y muestra cuántos caracteres faltan para el mínimo del mensaje.
+document.addEventListener('DOMContentLoaded', () => {
+    const contacto = document.getElementById('contacto-form');
+
+    if (!contacto) {
+        return;
+    }
+
+    const nombre = document.getElementById('nombre');
+    const email = document.getElementById('email');
+    const mensaje = document.getElementById('mensaje');
+    const contador = document.getElementById('mensaje-contador');
+    const boton = document.getElementById('contacto-submit');
+    const MINIMO_MENSAJE = 10;
+    const MAXIMO_MENSAJE = 3000;
+
+    const esValido = () => {
+        const nombreOk = nombre.value.trim().length >= 3;
+        const emailOk = email.value.trim() !== '' && email.checkValidity();
+        const mensajeOk = mensaje.value.trim().length >= MINIMO_MENSAJE;
+
+        return nombreOk && emailOk && mensajeOk;
+    };
+
+    const actualizarContador = () => {
+        const longitud = mensaje.value.trim().length;
+        const faltan = Math.max(0, MINIMO_MENSAJE - longitud);
+
+        contador.classList.remove('text-zinc-500', 'dark:text-zinc-400', 'text-red-600', 'dark:text-red-400', 'text-green-600', 'dark:text-green-400');
+
+        if (faltan > 0) {
+            contador.textContent = faltan === 1
+                ? 'Te falta 1 carácter para el mínimo de 10.'
+                : `Te faltan ${faltan} caracteres para el mínimo de 10.`;
+            contador.classList.add('text-red-600', 'dark:text-red-400');
+        } else {
+            contador.textContent = `${longitud}/${MAXIMO_MENSAJE} caracteres.`;
+            contador.classList.add('text-green-600', 'dark:text-green-400');
+        }
+    };
+
+    const actualizar = () => {
+        actualizarContador();
+        boton.disabled = !esValido();
+    };
+
+    [nombre, email, mensaje].forEach((campo) => {
+        campo.addEventListener('input', actualizar);
+        campo.addEventListener('blur', actualizar);
+    });
+
+    actualizar();
+});

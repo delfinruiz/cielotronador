@@ -135,6 +135,16 @@ class LandingTest extends TestCase
         $this->assertStringContainsString('Hola, soy la tía Jacqueline Reyes, directora del club CieloTronador.', $html);
     }
 
+    public function test_el_formulario_de_contacto_muestra_obligatorios_y_contador(): void
+    {
+        $html = $this->get(route('landing'))->assertOk()->getContent();
+
+        $this->assertStringContainsString('id="contacto-form"', $html);
+        $this->assertStringContainsString('id="contacto-submit"', $html);
+        $this->assertStringContainsString('id="mensaje-contador"', $html);
+        $this->assertSame(3, substr_count($html, 'aria-hidden="true">*</span>'));
+    }
+
     public function test_las_paginas_de_autenticacion_de_filament_estan_disponibles(): void
     {
         $this->get('/admin/login')->assertOk();

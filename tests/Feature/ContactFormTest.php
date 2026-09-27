@@ -20,7 +20,7 @@ class ContactFormTest extends TestCase
             'email' => 'juan@example.com',
             'mensaje' => 'Hola, quisiera información sobre las inscripciones.',
         ])
-            ->assertRedirect('/')
+            ->assertRedirect(route('landing').'#contacto')
             ->assertSessionHas('contacto-estado', 'enviado');
 
         Mail::assertSent(ContactMessage::class, function (ContactMessage $mail) {
@@ -40,7 +40,7 @@ class ContactFormTest extends TestCase
                 'email' => 'no-es-un-correo',
                 'mensaje' => 'corto',
             ])
-            ->assertRedirect(route('landing'))
+            ->assertRedirect(route('landing').'#contacto')
             ->assertSessionHasErrors(['nombre', 'email', 'mensaje']);
     }
 
@@ -55,7 +55,7 @@ class ContactFormTest extends TestCase
             'email' => 'juan@example.com',
             'mensaje' => 'Hola, quisiera información sobre las inscripciones.',
         ])
-            ->assertRedirect('/')
+            ->assertRedirect(route('landing').'#contacto')
             ->assertSessionHas('contacto-estado', 'error')
             ->assertSessionHasInput('nombre', 'Juan Pérez');
     }

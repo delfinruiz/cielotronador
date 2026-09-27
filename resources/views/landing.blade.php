@@ -377,11 +377,11 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('contacto') }}" method="POST" class="space-y-5" novalidate>
+                    <form action="{{ route('contacto') }}" method="POST" id="contacto-form" class="space-y-5" novalidate>
                         @csrf
 
                         <div>
-                            <label for="nombre" class="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Nombre</label>
+                            <label for="nombre" class="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Nombre <span class="text-red-500" aria-hidden="true">*</span></label>
                             <input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}" required
                                    class="w-full rounded-xl border-zinc-300 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 shadow-sm transition-colors placeholder:text-zinc-400 focus:border-brand-500 focus:ring-brand-500 dark:border-white/10 dark:bg-white/5 dark:text-white @error('nombre') border-red-400 focus:border-red-500 focus:ring-red-500 @enderror"
                                    placeholder="Tu nombre">
@@ -391,7 +391,7 @@
                         </div>
 
                         <div>
-                            <label for="email" class="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Dirección de correo electrónico</label>
+                            <label for="email" class="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Dirección de correo electrónico <span class="text-red-500" aria-hidden="true">*</span></label>
                             <input type="email" id="email" name="email" value="{{ old('email') }}" required
                                    class="w-full rounded-xl border-zinc-300 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 shadow-sm transition-colors placeholder:text-zinc-400 focus:border-brand-500 focus:ring-brand-500 dark:border-white/10 dark:bg-white/5 dark:text-white @error('email') border-red-400 focus:border-red-500 focus:ring-red-500 @enderror"
                                    placeholder="tu@correo.cl">
@@ -401,17 +401,18 @@
                         </div>
 
                         <div>
-                            <label for="mensaje" class="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Mensaje</label>
+                            <label for="mensaje" class="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Mensaje <span class="text-red-500" aria-hidden="true">*</span></label>
                             <textarea id="mensaje" name="mensaje" rows="5" required
                                       class="w-full rounded-xl border-zinc-300 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 shadow-sm transition-colors placeholder:text-zinc-400 focus:border-brand-500 focus:ring-brand-500 dark:border-white/10 dark:bg-white/5 dark:text-white @error('mensaje') border-red-400 focus:border-red-500 focus:ring-red-500 @enderror"
                                       placeholder="Cuéntanos en qué podemos ayudarte...">{{ old('mensaje') }}</textarea>
                             @error('mensaje')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
+                            <p id="mensaje-contador" class="mt-2 text-xs text-zinc-500 dark:text-zinc-400" aria-live="polite">Escribe al menos 10 caracteres.</p>
                         </div>
 
-                        <button type="submit"
-                                class="inline-flex w-full items-center justify-center rounded-full bg-brand-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 transition-colors hover:bg-brand-600 focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-zinc-950">
+                        <button type="submit" id="contacto-submit"
+                                class="inline-flex w-full cursor-pointer items-center justify-center rounded-full bg-brand-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 transition-colors hover:bg-brand-600 focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-brand-500 dark:focus:ring-offset-zinc-950">
                             Enviar
                         </button>
                     </form>

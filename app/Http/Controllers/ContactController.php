@@ -17,11 +17,11 @@ class ContactController extends Controller
             Mail::to(config('services.contact.email'))
                 ->send(new ContactMessage($data['nombre'], $data['email'], $data['mensaje']));
 
-            return back()->with('contacto-estado', 'enviado');
+            return redirect()->route('landing')->withFragment('contacto')->with('contacto-estado', 'enviado');
         } catch (\Throwable $e) {
             Log::error('Error al enviar el formulario de contacto: '.$e->getMessage());
 
-            return back()->with('contacto-estado', 'error')->withInput();
+            return redirect()->route('landing')->withFragment('contacto')->with('contacto-estado', 'error')->withInput();
         }
     }
 }

@@ -80,7 +80,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->renderHook(
                 PanelsRenderHook::FOOTER,
-                fn (): string => view('filament.footer')->render(),
+                fn (): string => request()->routeIs('filament.admin.auth.*')
+                    ? view('partials.footer')->render()
+                    : view('filament.footer')->render(),
             );
     }
 }

@@ -11,6 +11,11 @@ class ContactRequest extends FormRequest
         return true;
     }
 
+    protected function getRedirectUrl(): string
+    {
+        return route('landing').'#contacto';
+    }
+
     public function rules(): array
     {
         return [

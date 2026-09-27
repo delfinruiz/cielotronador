@@ -1,8 +1,4 @@
-<div class="mt-6 space-y-3 border-t border-zinc-200 pt-5 text-center dark:border-white/10">
-    <p class="text-xs font-semibold tracking-[0.25em] text-zinc-500 uppercase dark:text-zinc-400">
-        «Más que un club, una familia»
-    </p>
-
+<div class="mt-6 text-center">
     <a
         href="{{ route('landing') }}"
         class="inline-flex items-center justify-center gap-1.5 text-sm font-semibold text-primary-600 transition-colors hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
