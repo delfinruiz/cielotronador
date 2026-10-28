@@ -78,6 +78,51 @@ return [
             'report' => false,
         ],
 
+        'marcas' => [
+            'driver' => 'local',
+            'root' => public_path('img/marcas'),
+            'url' => '/img/marcas',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'testimonios' => [
+            'driver' => 'local',
+            'root' => public_path('img/testimonios'),
+            'url' => '/img/testimonios',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'plantillas' => [
+            'driver' => 'local',
+            'root' => public_path('img/plantillas'),
+            'url' => '/img/plantillas',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'productos' => [
+            'driver' => 'local',
+            'root' => public_path('img/productos'),
+            'url' => '/img/productos',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'branding' => [
+            'driver' => 'local',
+            'root' => public_path('img/branding'),
+            'url' => '/img/branding',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
     ],
 
     /*

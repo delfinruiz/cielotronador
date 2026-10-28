@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, follow">
 
-    <title>@yield('titulo', 'Políticas') | Club CieloTronador</title>
+    <title>@yield('titulo', 'Políticas') | {{ \App\Support\Branding::name() }}</title>
 
-    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon-32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon-16.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('img/apple-touch-icon.png') }}">
+    <link rel="icon" href="{{ \App\Support\Branding::faviconUrl() }}" sizes="any">
+    <link rel="apple-touch-icon" href="{{ \App\Support\Branding::faviconUrl() }}">
 
-    @fonts
+    @fonts(App\Support\TemplateFonts::DEFAULTS)
 
     <script>
         document.documentElement.classList.add('js');
@@ -33,8 +31,9 @@
 
 <header id="site-header" class="sticky top-0 z-50 border-b border-zinc-200/70 bg-white/90 backdrop-blur-md dark:border-white/10 dark:bg-zinc-950/90">
     <div class="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <a href="{{ route('landing') }}" class="flex shrink-0 items-center gap-3" aria-label="Club CieloTronador - Inicio">
-            <img src="{{ asset('img/logo.png') }}" alt="Club CieloTronador" class="h-12 w-auto">
+        <a href="{{ route('landing') }}" class="flex shrink-0 items-center gap-3" aria-label="{{ \App\Support\Branding::name() }} - Inicio">
+            <img src="{{ \App\Support\Branding::logoLightUrl() }}" alt="{{ \App\Support\Branding::name() }}" class="h-12 w-auto dark:hidden">
+            <img src="{{ \App\Support\Branding::logoDarkUrl() }}" alt="{{ \App\Support\Branding::name() }}" class="hidden h-12 w-auto dark:block">
         </a>
 
         <a href="{{ route('landing') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 transition-colors hover:text-brand-500 dark:text-brand-400 dark:hover:text-brand-300">

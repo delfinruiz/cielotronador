@@ -5,6 +5,10 @@
 
 **Correo electrónico:** {{ $email }}
 
+@if ($telefono)
+**Teléfono:** {{ $telefono }}
+@endif
+
 **Mensaje:**
 
 {{ $mensaje }}

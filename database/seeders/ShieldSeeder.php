@@ -6,6 +6,8 @@ use BezhanSalleh\FilamentShield\Support\Utils;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 class ShieldSeeder extends Seeder
@@ -17,7 +19,7 @@ class ShieldSeeder extends Seeder
         $tenants = '[]';
         $users = '[]';
         $userTenantPivot = '[]';
-        $rolesWithPermissions = '[{"name":"super_admin","guard_name":"web","permissions":["Create:Galeria","Create:Noticia","Create:Role","Create:User","Delete:Galeria","Delete:Noticia","Delete:Role","Delete:User","DeleteAny:Galeria","DeleteAny:Noticia","DeleteAny:Role","DeleteAny:User","ForceDelete:Galeria","ForceDelete:Noticia","ForceDelete:Role","ForceDelete:User","ForceDeleteAny:Galeria","ForceDeleteAny:Noticia","ForceDeleteAny:Role","ForceDeleteAny:User","Reorder:Galeria","Reorder:Noticia","Reorder:Role","Reorder:User","Replicate:Galeria","Replicate:Noticia","Replicate:Role","Replicate:User","Restore:Galeria","Restore:Noticia","Restore:Role","Restore:User","RestoreAny:Galeria","RestoreAny:Noticia","RestoreAny:Role","RestoreAny:User","Update:Galeria","Update:Noticia","Update:Role","Update:User","View:Galeria","View:Noticia","View:Role","View:User","ViewAny:Galeria","ViewAny:Noticia","ViewAny:Role","ViewAny:User"]},{"name":"panel_user","guard_name":"web","permissions":[]}]';
+        $rolesWithPermissions = '[{"name":"super_admin","guard_name":"web","permissions":["Create:Galeria","Create:Noticia","Create:Role","Create:User","Delete:Galeria","Delete:Noticia","Delete:Role","Delete:User","DeleteAny:Galeria","DeleteAny:Noticia","DeleteAny:Role","DeleteAny:User","ForceDelete:Galeria","ForceDelete:Noticia","ForceDelete:Role","ForceDelete:User","ForceDeleteAny:Galeria","ForceDeleteAny:Noticia","ForceDeleteAny:Role","ForceDeleteAny:User","Reorder:Galeria","Reorder:Noticia","Reorder:Role","Reorder:User","Replicate:Galeria","Replicate:Noticia","Replicate:Role","Replicate:User","Restore:Galeria","Restore:Noticia","Restore:Role","Restore:User","RestoreAny:Galeria","RestoreAny:Noticia","RestoreAny:Role","RestoreAny:User","Update:Galeria","Update:Noticia","Update:Role","Update:User","View:Galeria","View:Noticia","View:Role","View:User","ViewAny:Galeria","ViewAny:Noticia","ViewAny:Role","ViewAny:User","ViewAny:PageTemplate","View:PageTemplate","Create:PageTemplate","Update:PageTemplate","Delete:PageTemplate","DeleteAny:PageTemplate","Restore:PageTemplate","ForceDelete:PageTemplate","ForceDeleteAny:PageTemplate","RestoreAny:PageTemplate","Replicate:PageTemplate","Reorder:PageTemplate","View:SecurityCenter","ViewAny:Producto","ViewAny:CategoriaProducto","View:Producto","View:CategoriaProducto","Create:Producto","Create:CategoriaProducto","Update:Producto","Update:CategoriaProducto","Delete:Producto","Delete:CategoriaProducto","DeleteAny:Producto","DeleteAny:CategoriaProducto","Restore:Producto","Restore:CategoriaProducto","ForceDelete:Producto","ForceDelete:CategoriaProducto","ForceDeleteAny:Producto","ForceDeleteAny:CategoriaProducto","RestoreAny:Producto","RestoreAny:CategoriaProducto","Replicate:Producto","Replicate:CategoriaProducto","Reorder:Producto","Reorder:CategoriaProducto"]},{"name":"Jugador","guard_name":"web","permissions":[]},{"name":"Directora","guard_name":"web","permissions":["ViewAny:Galeria","View:Galeria","Create:Galeria","Update:Galeria","Delete:Galeria","DeleteAny:Galeria","Restore:Galeria","ForceDelete:Galeria","ForceDeleteAny:Galeria","RestoreAny:Galeria","Replicate:Galeria","Reorder:Galeria","ViewAny:Noticia","View:Noticia","Create:Noticia","Update:Noticia","Delete:Noticia","DeleteAny:Noticia","Restore:Noticia","ForceDelete:Noticia","ForceDeleteAny:Noticia","RestoreAny:Noticia","Replicate:Noticia","Reorder:Noticia","ViewAny:User","View:User","Create:User","Update:User","Delete:User","DeleteAny:User","Restore:User","ForceDelete:User","ForceDeleteAny:User","RestoreAny:User","Replicate:User","Reorder:User","ViewAny:Producto","ViewAny:CategoriaProducto","View:Producto","View:CategoriaProducto","Create:Producto","Create:CategoriaProducto","Update:Producto","Update:CategoriaProducto","Delete:Producto","Delete:CategoriaProducto","DeleteAny:Producto","DeleteAny:CategoriaProducto","Restore:Producto","Restore:CategoriaProducto","ForceDelete:Producto","ForceDelete:CategoriaProducto","ForceDeleteAny:Producto","ForceDeleteAny:CategoriaProducto","RestoreAny:Producto","RestoreAny:CategoriaProducto","Replicate:Producto","Replicate:CategoriaProducto","Reorder:Producto","Reorder:CategoriaProducto"]},{"name":"Tesorera","guard_name":"web","permissions":[]},{"name":"Secretaria","guard_name":"web","permissions":["ViewAny:Galeria","View:Galeria","Create:Galeria","Update:Galeria","Delete:Galeria","DeleteAny:Galeria","Restore:Galeria","ForceDelete:Galeria","ForceDeleteAny:Galeria","RestoreAny:Galeria","Replicate:Galeria","Reorder:Galeria","ViewAny:Noticia","View:Noticia","Create:Noticia","Update:Noticia","Delete:Noticia","DeleteAny:Noticia","Restore:Noticia","ForceDelete:Noticia","ForceDeleteAny:Noticia","RestoreAny:Noticia","Replicate:Noticia","Reorder:Noticia","ViewAny:User","View:User","Create:User","Update:User","Delete:User","DeleteAny:User","Restore:User","ForceDelete:User","ForceDeleteAny:User","RestoreAny:User","Replicate:User","Reorder:User","ViewAny:Producto","ViewAny:CategoriaProducto","View:Producto","View:CategoriaProducto","Create:Producto","Create:CategoriaProducto","Update:Producto","Update:CategoriaProducto","Delete:Producto","Delete:CategoriaProducto","DeleteAny:Producto","DeleteAny:CategoriaProducto","Restore:Producto","Restore:CategoriaProducto","ForceDelete:Producto","ForceDelete:CategoriaProducto","ForceDeleteAny:Producto","ForceDeleteAny:CategoriaProducto","RestoreAny:Producto","RestoreAny:CategoriaProducto","Replicate:Producto","Replicate:CategoriaProducto","Reorder:Producto","Reorder:CategoriaProducto"]},{"name":"Profesor","guard_name":"web","permissions":[]},{"name":"panel_user","guard_name":"web","permissions":[]},{"name":"Apoderado","guard_name":"web","permissions":[]}]';
         $directPermissions = '[]';
 
         // 1. Seed tenants first (if present)
@@ -31,6 +33,9 @@ class ShieldSeeder extends Seeder
         // 3. Seed direct permissions
         static::makeDirectPermissions($directPermissions);
 
+        // 3.1 Permisos de los módulos dinámicos (FAQ, marcas y testimonios).
+        static::grantDynamicContentPermissions();
+
         // 4. Seed users with their roles/permissions (if present)
         if (! blank($users) && $users !== '[]') {
             static::seedUsers($users);
@@ -42,6 +47,35 @@ class ShieldSeeder extends Seeder
         }
 
         $this->command->info('Shield Seeding Completed.');
+    }
+
+    /**
+     * Crea los permisos de los módulos de contenido dinámico y los asigna a
+     * los roles que ya administraban noticias y galería.
+     */
+    protected static function grantDynamicContentPermissions(): void
+    {
+        $abilities = [
+            'ViewAny', 'View', 'Create', 'Update', 'Delete', 'DeleteAny',
+            'Restore', 'ForceDelete', 'ForceDeleteAny', 'RestoreAny', 'Replicate', 'Reorder',
+        ];
+
+        $permissions = [];
+
+        foreach (['Faq', 'Marca', 'Testimonio'] as $model) {
+            foreach ($abilities as $ability) {
+                $name = "{$ability}:{$model}";
+                Permission::findOrCreate($name, 'web');
+                $permissions[] = $name;
+            }
+        }
+
+        foreach (['super_admin', 'Directora', 'Secretaria'] as $roleName) {
+            $role = Role::findByName($roleName, 'web');
+            $role->givePermissionTo($permissions);
+        }
+
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
     }
 
     protected static function seedTenants(string $tenants): void

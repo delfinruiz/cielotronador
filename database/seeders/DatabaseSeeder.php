@@ -24,6 +24,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call(NoticiaSeeder::class);
         $this->call(GaleriaSeeder::class);
+        $this->call(CategoriaProductoSeeder::class);
+        $this->call(ProductoSeeder::class);
         $this->call(ShieldSeeder::class);
+        $this->call(SystemOwnerSeeder::class);
+        $this->call(PageTemplateDemoSeeder::class);
+        $this->call(ClassicHomeBuilderSeeder::class);
+        $this->call(ContenidoDinamicoSeeder::class);
     }
 }

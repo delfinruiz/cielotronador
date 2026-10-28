@@ -2,6 +2,8 @@
 
 @section('titulo', 'Política de Cookies')
 
+@php($aviso = \App\Support\CookieBanner::current())
+
 @section('contenido')
     <h1 class="font-heading mb-2 text-3xl font-semibold text-zinc-900 dark:text-white">Política de Cookies</h1>
     <p class="mb-8 text-sm text-zinc-500 dark:text-zinc-400">Última actualización: {{ now()->format('d/m/Y') }}</p>
@@ -53,8 +55,8 @@
             <h2 class="font-heading mb-2 text-lg font-semibold text-zinc-900 dark:text-white">3. Gestión del consentimiento</h2>
             <p>
                 Al visitar el sitio por primera vez verás un aviso de cookies. Puedes elegir entre
-                <strong>"Aceptar todas"</strong> o <strong>"Solo necesarias"</strong>. Tu elección se guarda en tu
-                navegador y no volverá a mostrarse, salvo que borres los datos de tu navegador.
+                <strong>"{{ $aviso['accept_label'] }}"</strong> o <strong>"{{ $aviso['necessary_label'] }}"</strong>.
+                Tu elección se guarda en tu navegador y no volverá a mostrarse, salvo que borres los datos de tu navegador.
             </p>
         </section>
 

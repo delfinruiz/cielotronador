@@ -3,17 +3,20 @@
 <div
     id="whatsapp-widget"
     class="fixed right-6 bottom-6 z-[60]"
+    data-wa-widget="yes"
     data-wa-number="56998970550"
-    data-wa-default="Hola, quiero hacer una consulta al Club CieloTronador."
+    data-wa-title="Tía Jacqueline Reyes"
+    data-wa-message="Hola, soy la tía Jacqueline Reyes, directora del club CieloTronador."
 >
     {{-- Panel de chat --}}
     <div
         id="whatsapp-panel"
+        data-wa-panel="yes"
         class="whatsapp-panel absolute right-0 bottom-full mb-4 w-[calc(100vw-3rem)] max-w-sm overflow-hidden rounded-2xl shadow-2xl"
         role="dialog"
         aria-modal="false"
         aria-label="Chat de WhatsApp con la tía Jacqueline Reyes"
-        hidden
+        style="display:none"
     >
         {{-- Cabecera --}}
         <div class="flex items-center gap-3 bg-[#075E54] px-4 py-3 text-white">
@@ -21,12 +24,13 @@
                 @include('landing.partials.baloncesto', ['attributes' => 'class="h-8 w-8"'])
             </span>
             <div class="min-w-0 flex-1">
-                <p class="truncate text-sm font-semibold">Tía Jacqueline Reyes</p>
+                <p data-wa-title-text="yes" class="truncate text-sm font-semibold">Tía Jacqueline Reyes</p>
                 <p class="truncate text-xs text-white/75">Directora · Club CieloTronador</p>
             </div>
             <button
                 type="button"
                 id="whatsapp-close"
+                data-wa-close="yes"
                 aria-label="Cerrar chat"
                 class="inline-flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
             >
@@ -39,7 +43,7 @@
         {{-- Cuerpo --}}
         <div class="bg-[#ECE5DD] px-4 py-5 dark:bg-[#0B141A]">
             <div class="max-w-[85%] rounded-lg rounded-tl-none bg-white px-3 py-2 shadow-sm dark:bg-[#202C33]">
-                <p class="text-sm leading-relaxed text-zinc-800 dark:text-zinc-100">
+                <p data-wa-message-text="yes" class="text-sm leading-relaxed text-zinc-800 dark:text-zinc-100">
                     Hola, soy la tía Jacqueline Reyes, directora del club CieloTronador.
                 </p>
                 <span class="mt-1 block text-right text-[11px] text-zinc-400 dark:text-zinc-500">ahora</span>
@@ -48,10 +52,11 @@
 
         {{-- Pie: entrada + envío --}}
         <div class="bg-[#F0F2F5] dark:bg-[#1F2C34]">
-            <form id="whatsapp-form" class="flex items-center gap-2 px-3 pt-3">
+            <form id="whatsapp-form" data-wa-form="yes" class="flex items-center gap-2 px-3 pt-3">
                 <input
                     type="text"
                     id="whatsapp-input"
+                    data-wa-input="yes"
                     autocomplete="off"
                     aria-label="Escribe tu mensaje"
                     placeholder="Escribe un mensaje…"
@@ -77,6 +82,7 @@
         <button
             type="button"
             id="whatsapp-toggle"
+            data-wa-toggle="yes"
             aria-controls="whatsapp-panel"
             aria-expanded="false"
             aria-label="Abrir chat de WhatsApp"

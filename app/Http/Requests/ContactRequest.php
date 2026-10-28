@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Support\SafeReturnPath;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ContactRequest extends FormRequest
@@ -13,7 +14,7 @@ class ContactRequest extends FormRequest
 
     protected function getRedirectUrl(): string
     {
-        return route('landing').'#contacto';
+        return SafeReturnPath::from($this->input('_return')).'#contacto';
     }
 
     public function rules(): array
@@ -21,6 +22,7 @@ class ContactRequest extends FormRequest
         return [
             'nombre' => ['required', 'string', 'min:3', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
+            'telefono' => ['nullable', 'string', 'max:30'],
             'mensaje' => ['required', 'string', 'min:10', 'max:3000'],
         ];
     }

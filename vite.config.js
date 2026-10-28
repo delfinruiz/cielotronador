@@ -15,6 +15,27 @@ export default defineConfig({
                 bunny('Oswald', {
                     weights: [500, 600, 700],
                 }),
+                bunny('Inter', {
+                    weights: [400, 600, 700],
+                }),
+                bunny('Montserrat', {
+                    weights: [400, 600, 700],
+                }),
+                bunny('Lato', {
+                    weights: [400, 700],
+                }),
+                bunny('Raleway', {
+                    weights: [400, 600, 700],
+                }),
+                bunny('Playfair Display', {
+                    weights: [400, 600, 700],
+                }),
+                bunny('Roboto Slab', {
+                    weights: [400, 700],
+                }),
+                bunny('Bebas Neue', {
+                    weights: [400],
+                }),
             ],
         }),
         tailwindcss(),

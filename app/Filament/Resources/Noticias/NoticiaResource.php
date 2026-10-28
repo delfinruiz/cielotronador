@@ -21,6 +21,8 @@ class NoticiaResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedNewspaper;
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Contenido';
+
     protected static ?string $navigationLabel = 'Noticias';
 
     protected static ?string $modelLabel = 'Noticia';

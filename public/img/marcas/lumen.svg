@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 48" role="img" aria-label="Lumen">
+  <circle cx="27" cy="24" r="8" fill="none" stroke="#1f2937" stroke-width="3.5"/>
+  <path d="M27 8v4M27 36v4M11 24h4M39 24h4M16 13l3 3M35 32l3 3M38 13l-3 3M19 32l-3 3" stroke="#1f2937" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="54" y="32" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" letter-spacing="1.5" fill="#1f2937">lumen</text>
+</svg>

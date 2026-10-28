@@ -18,6 +18,8 @@ class GaleriaResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
 
+    protected static string|\UnitEnum|null $navigationGroup = 'Contenido';
+
     protected static ?string $navigationLabel = 'Galería';
 
     protected static ?string $modelLabel = 'Fotografía';

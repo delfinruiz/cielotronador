@@ -16,6 +16,7 @@ class ContactMessage extends Mailable
         public string $nombre,
         public string $email,
         public string $mensaje,
+        public ?string $telefono = null,
     ) {}
 
     public function envelope(): Envelope

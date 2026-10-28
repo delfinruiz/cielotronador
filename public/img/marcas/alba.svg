@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 48" role="img" aria-label="Alba">
+  <path d="M16 32a11 11 0 0 1 22 0" fill="none" stroke="#1f2937" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M12 36h30" stroke="#1f2937" stroke-width="3.5" stroke-linecap="round"/>
+  <text x="52" y="32" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" letter-spacing="1.5" fill="#1f2937">alba</text>
+</svg>

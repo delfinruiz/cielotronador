@@ -3,16 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Club de Básquetbol Cielo Tronador de Talcahuano, Chile. Más que un club, una familia. Categorías desde sub 9 hasta adultos.">
+    @include('landing.partials.seo', ['seo' => $seo])
 
-    <title>Club CieloTronador | Cielo Tronador</title>
+    <link rel="icon" href="{{ \App\Support\Branding::faviconUrl() }}" sizes="any">
+    <link rel="apple-touch-icon" href="{{ \App\Support\Branding::faviconUrl() }}">
 
-    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon-32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon-16.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('img/apple-touch-icon.png') }}">
-
-    @fonts
+    @fonts(App\Support\TemplateFonts::DEFAULTS)
 
     {{-- Aplica el tema antes del primer render para evitar el flash --}}
     <script>
@@ -35,66 +31,7 @@
 <div id="scroll-progress" class="fixed top-0 right-0 left-0 z-[60] h-1 bg-brand-500" aria-hidden="true"></div>
 
 {{-- ============================== HEADER ============================== --}}
-<header id="site-header" class="sticky top-0 z-50 border-b border-zinc-200/70 bg-white/90 backdrop-blur-md dark:border-white/10 dark:bg-zinc-950/90">
-    <div class="header-bar mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <a href="{{ route('landing') }}" class="flex shrink-0 items-center gap-3" aria-label="Club CieloTronador - Inicio">
-            <img src="{{ asset('img/logo.png') }}" alt="Club CieloTronador" class="h-12 w-auto">
-        </a>
-
-        <nav class="hidden items-center gap-8 lg:flex" aria-label="Navegación principal">
-            <a href="#quienes-somos" data-nav-link class="text-sm font-medium text-zinc-600 transition-colors hover:text-brand-600 dark:text-zinc-300 dark:hover:text-brand-400">Quiénes Somos</a>
-            <a href="#noticias" data-nav-link class="text-sm font-medium text-zinc-600 transition-colors hover:text-brand-600 dark:text-zinc-300 dark:hover:text-brand-400">Noticias</a>
-            <a href="#actividades" data-nav-link class="text-sm font-medium text-zinc-600 transition-colors hover:text-brand-600 dark:text-zinc-300 dark:hover:text-brand-400">Actividades</a>
-            <a href="#horarios" data-nav-link class="text-sm font-medium text-zinc-600 transition-colors hover:text-brand-600 dark:text-zinc-300 dark:hover:text-brand-400">Horarios</a>
-            <a href="#contacto" data-nav-link class="text-sm font-medium text-zinc-600 transition-colors hover:text-brand-600 dark:text-zinc-300 dark:hover:text-brand-400">Contáctenos</a>
-        </nav>
-
-        <div class="flex items-center gap-3">
-            <button id="theme-toggle" type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-full text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-white/10 dark:hover:text-white" aria-label="Cambiar tema">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-moon h-5 w-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-sun hidden h-5 w-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>
-                </svg>
-            </button>
-
-            @auth
-                <a href="{{ url('/admin') }}" class="hidden items-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-600 sm:inline-flex">
-                    Ir al panel
-                </a>
-            @else
-                <a href="{{ url('/admin/login') }}" class="hidden items-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-600 sm:inline-flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4">
-                        <path fill-rule="evenodd" d="M14 7.5a5.5 5.5 0 1 0-11 0 5.5 5.5 0 0 0 11 0ZM8 1a6.5 6.5 0 1 0 3.251 12.132l2.558 2.559a.75.75 0 0 0 1.06-1.06l-2.558-2.559A6.5 6.5 0 0 0 8 1Zm2.6 5.4a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" clip-rule="evenodd"/>
-                    </svg>
-                    Ingresar
-                </a>
-            @endauth
-
-            <button id="mobile-menu-toggle" type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-full text-zinc-600 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-white/10 lg:hidden" aria-label="Abrir menú" aria-expanded="false">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <nav id="mobile-menu" class="hidden border-t border-zinc-200/70 px-4 pt-2 pb-4 dark:border-white/10 lg:hidden" aria-label="Navegación móvil">
-        <div class="flex flex-col gap-1">
-            <a href="#quienes-somos" data-nav-link class="rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-white/10">Quiénes Somos</a>
-            <a href="#noticias" data-nav-link class="rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-white/10">Noticias</a>
-            <a href="#actividades" data-nav-link class="rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-white/10">Actividades</a>
-            <a href="#horarios" data-nav-link class="rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-white/10">Horarios</a>
-            <a href="#contacto" data-nav-link class="rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-white/10">Contáctenos</a>
-            @auth
-                <a href="{{ url('/admin') }}" class="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-600">Ir al panel</a>
-            @else
-                <a href="{{ url('/admin/login') }}" class="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-600">Ingresar</a>
-            @endauth
-        </div>
-    </nav>
-</header>
+@include('landing.partials.header', ['menuItems' => $menuItems])
 
 <main>
     {{-- ============================== HERO ============================== --}}
@@ -379,6 +316,10 @@
 
                     <form action="{{ route('contacto') }}" method="POST" id="contacto-form" class="space-y-5" novalidate>
                         @csrf
+                        <div class="hidden" aria-hidden="true">
+                            <label for="website">No completar</label>
+                            <input type="text" id="website" name="website" value="" tabindex="-1" autocomplete="off">
+                        </div>
 
                         <div>
                             <label for="nombre" class="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Nombre <span class="text-red-500" aria-hidden="true">*</span></label>
@@ -437,75 +378,7 @@
     </span>
 </button>
 
-{{-- ============================== MODAL GALERÍA ============================== --}}
-<div id="gallery-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-zinc-950/90 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Vista ampliada de fotografía">
-    <button type="button" id="gallery-modal-close" class="absolute top-4 right-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400" aria-label="Cerrar">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
-        </svg>
-    </button>
-
-    <button type="button" id="gallery-modal-prev" class="absolute left-2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 sm:left-6" aria-label="Fotografía anterior">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-7 w-7">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
-        </svg>
-    </button>
-
-    <button type="button" id="gallery-modal-next" class="absolute right-2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 sm:right-6" aria-label="Fotografía siguiente">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-7 w-7">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
-        </svg>
-    </button>
-
-    <figure class="flex max-h-full flex-col items-center">
-        <img id="gallery-modal-img" src="" alt="" class="max-h-[80vh] max-w-full rounded-xl object-contain shadow-2xl">
-        <figcaption id="gallery-modal-caption" class="mt-3 text-sm font-medium text-zinc-300"></figcaption>
-    </figure>
-</div>
-
-{{-- ============================== MODAL HORARIO ============================== --}}
-<div id="horario-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-zinc-950/90 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Horario ampliado">
-    <button type="button" id="horario-modal-close" class="absolute top-4 right-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400" aria-label="Cerrar">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
-        </svg>
-    </button>
-
-    <button type="button" id="horario-modal-prev" class="absolute left-2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 sm:left-6" aria-label="Horario anterior">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-7 w-7">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
-        </svg>
-    </button>
-
-    <button type="button" id="horario-modal-next" class="absolute right-2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 sm:right-6" aria-label="Horario siguiente">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-7 w-7">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
-        </svg>
-    </button>
-
-    <img id="horario-modal-img" src="" alt="Horario de entrenamiento del Club CieloTronador" class="max-h-[85vh] max-w-full rounded-xl object-contain shadow-2xl">
-</div>
-
-{{-- ============================== MODAL NOTICIA ============================== --}}
-<script type="application/json" id="noticias-data">@json(collect($noticias)->map(fn ($n) => [...$n, 'imagen' => asset($n['imagen'])]), JSON_UNESCAPED_UNICODE)</script>
-
-<div id="noticia-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-zinc-950/90 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Noticia">
-    <div class="flex max-h-full w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-zinc-900">
-        <div class="relative shrink-0">
-            <img id="noticia-modal-img" src="" alt="" class="max-h-64 w-full object-cover">
-            <button type="button" id="noticia-modal-close" class="absolute top-4 right-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-zinc-950/60 text-white transition-colors hover:bg-zinc-950/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400" aria-label="Cerrar noticia">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
-                </svg>
-            </button>
-        </div>
-        <div class="overflow-y-auto p-6 sm:p-8">
-            <time id="noticia-modal-fecha" datetime="" class="mb-2 block text-xs font-semibold tracking-wider text-brand-600 uppercase dark:text-brand-400"></time>
-            <h3 id="noticia-modal-titulo" class="font-heading mb-4 text-2xl leading-snug font-semibold text-zinc-900 dark:text-white"></h3>
-            <div id="noticia-modal-cuerpo" class="space-y-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300"></div>
-        </div>
-    </div>
-</div>
+@include('landing.partials.modals')
 
 @include('landing.partials.whatsapp')
 

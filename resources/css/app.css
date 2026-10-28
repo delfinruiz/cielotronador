@@ -26,6 +26,7 @@
 @layer base {
     html {
         scroll-behavior: smooth;
+        overflow-x: clip;
     }
 
     body {
@@ -94,14 +95,35 @@
         color: var(--color-brand-400);
     }
 
-[data-top-button] {
+[data-top-button],
+[id^='top-button'] {
     opacity: 0;
     pointer-events: none;
 }
 
-[data-top-button].is-visible {
+[data-top-button].is-visible,
+[id^='top-button'].is-visible {
     opacity: 1;
     pointer-events: auto;
+}
+
+[data-top-button][data-top-enabled='no'],
+[id^='top-button'][data-top-enabled='no'] {
+    display: none !important;
+}
+
+[data-cf-social-off] {
+    display: none !important;
+}
+
+[data-cf-social-tone='light'] img,
+[data-cf-social] img {
+    transition: filter 150ms ease;
+}
+
+.dark [data-cf-social] img,
+.dark [data-cf-social-network] img {
+    filter: invert(1);
 }
 
     .top-button-rotator {
@@ -112,11 +134,13 @@
         transform-origin: 50% 100%;
     }
 
-    [data-top-button].is-visible .top-button-bounce {
+    [data-top-button].is-visible .top-button-bounce,
+    [id^='top-button'].is-visible .top-button-bounce {
         animation: driblar 1.5s ease-in-out infinite;
     }
 
-    [data-top-button].is-scrolling .top-button-bounce {
+    [data-top-button].is-scrolling .top-button-bounce,
+    [id^='top-button'].is-scrolling .top-button-bounce {
         animation-play-state: paused;
     }
 
@@ -141,7 +165,9 @@
 
     @media (prefers-reduced-motion: reduce) {
         [data-top-button],
-        [data-top-button].is-visible {
+        [data-top-button].is-visible,
+        [id^='top-button'],
+        [id^='top-button'].is-visible {
             transition: none;
         }
 

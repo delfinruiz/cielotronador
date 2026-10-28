@@ -1,7 +1,7 @@
 <footer class="border-t border-gray-200 py-6 dark:border-white/10">
     <div class="flex flex-col items-center justify-center gap-2 text-center">
         <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            «Más que un club, una familia»
+            {{ \App\Support\Branding::tagline() }}
         </p>
 
         <a
@@ -15,7 +15,7 @@
         </a>
 
         <p class="text-xs text-gray-400 dark:text-gray-500">
-            Copyright {{ now()->year }} por CieloTronador · Talcahuano, Chile
+            Copyright {{ now()->year }} por {{ \App\Support\Branding::name() }} · {{ \App\Support\Branding::city() }}
         </p>
     </div>
 </footer>
